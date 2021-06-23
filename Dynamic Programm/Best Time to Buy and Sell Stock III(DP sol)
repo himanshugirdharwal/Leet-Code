@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<vector<int>>> dp;
+    
+    int stock(vector<int>&prices,bool bought,int t,int i)
+    {
+        if(prices.size()==i || t==0) return 0;
+        if(dp[bought][t][i]!=-1)return dp[bought][t][i];
+        
+        
+        int a=stock(prices,bought,t,i+1); 
+        if(bought)
+        {
+            a=max(a,prices[i]+stock(prices,false,t-1,i+1));
+        }
+        else{
+            a=max(a,stock(prices,true,t,i+1)-prices[i]);
+        }
+        
+        return dp[bought][t][i]=a;
+    }
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        dp.resize(2,vector<vector<int>>(3,vector<int>(n,-1)));
+        
+        
+        return stock(prices,false,2,0);
+    }
+};
