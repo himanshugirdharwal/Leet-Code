@@ -1,3 +1,4 @@
+//faster than 100%
 class Solution {
 public:
     int rob(vector<int>& a) {
