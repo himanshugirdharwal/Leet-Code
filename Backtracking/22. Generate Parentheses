@@ -1,0 +1,31 @@
+class Solution {
+public:
+    
+    vector<string> ans;
+    
+    void fun(int n,int m,string s)
+    {
+        if(n==0 && m==0){
+            ans.push_back(s);
+            return ;
+        }
+        
+        if(n==0 && m!=0)
+            fun(n,m-1,s+")");
+        else if(n==m)
+        {
+            fun(n-1,m,s+"(");
+        }
+        else if(n<m)
+        {
+            fun(n-1,m,s+"(");
+            fun(n,m-1,s+")");
+        }
+    }
+    
+    vector<string> generateParenthesis(int n) {
+        string s;
+        fun(n,n,s);
+        return ans;
+    }
+};
